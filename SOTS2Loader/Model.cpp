@@ -11,7 +11,7 @@ void Vertex::print()
 	std::cin.tie(NULL);
 
 	std::cout << std::fixed << std::setprecision(2)
-		<< std::setw(6) << this->x << " "
+		<< std::right << std::setw(6) << this->x << " "
 		<< std::right << std::setw(6) << this->y << " "
 		<< std::right << std::setw(6) << this->z << " "
 		<< std::right << std::setw(6) << this->unknown1 << " "
@@ -112,7 +112,7 @@ bool Model::Load(std::string& filename, const MaterialDictionary* dictionary)
 
 	for (int i = 0; i < nodeObjectCount; ++i)
 	{
-		int index; // TODO: Store this somewhere but what is it?!
+		int index;
 		file.read(reinterpret_cast<char*>(&index), sizeof(index));
 		this->nodeObjectParents.push_back(index);
 	}
@@ -223,8 +223,18 @@ bool Model::SaveAsOBJ()
 		return false;
 	}
 
-	std::string objFilename = this->filename.substr(0, this->filename.find_last_of('.')) + ".obj";
-	std::string mtlFilename = this->filename.substr(0, this->filename.find_last_of('.')) + ".mtl";
+	size_t location = this->filename.find_last_of('\\');
+	if (location == this->filename.npos)
+	{
+		location = 0;
+	}
+	else
+	{
+		location = this->filename.find_first_not_of('\\', location);
+	}	
+
+	std::string objFilename = this->filename.substr(location, this->filename.find_last_of('.') - location) + ".obj";
+	std::string mtlFilename = this->filename.substr(location, this->filename.find_last_of('.') - location) + ".mtl";
 
 	if (this->dictionary != nullptr)
 	{		
@@ -339,7 +349,7 @@ void NodeObject::PrintIndexedVertices()
 		std::cin.tie(NULL);
 
 		std::cout << std::fixed << std::setprecision(2)
-			<< std::setw(6) << this->nodeVertexes[this->nodeIndexes[i]].x << " "
+			<< std::right << std::setw(6) << this->nodeVertexes[this->nodeIndexes[i]].x << " "
 			<< std::right << std::setw(6) << this->nodeVertexes[this->nodeIndexes[i]].y << " "
 			<< std::right << std::setw(6) << this->nodeVertexes[this->nodeIndexes[i]].z << " "
 			<< std::right << std::setw(6) << this->nodeVertexes[this->nodeIndexes[i]].unknown1 << " "

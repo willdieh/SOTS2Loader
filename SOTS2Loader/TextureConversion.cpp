@@ -192,9 +192,18 @@ bool SOTS2TextureToDDS(const std::string& inputFilename, std::string& outputFile
 		}
 	}
 		
-	if (customInputFilename.size() > 5 && (customInputFilename.compare(customInputFilename.size() - 5, 5, ".tga~") == 0 || customInputFilename.compare(customInputFilename.size() - 5, 5, ".bmp~")))
+	if (customInputFilename.size() > 5 && (customInputFilename.compare(customInputFilename.size() - 5, 5, ".tga~") == 0 || customInputFilename.compare(customInputFilename.size() - 5, 5, ".bmp~") == 0))
 	{
-		outputFilename = customInputFilename.substr(0, customInputFilename.size() - 5) + ".dds";
+		size_t location = customInputFilename.find_last_of('\\');
+		if (location == customInputFilename.npos)
+		{
+			location = 0;
+		}
+		else
+		{
+			location = customInputFilename.find_first_not_of('\\', location);
+		}
+		outputFilename = customInputFilename.substr(location, customInputFilename.find_last_of('.') - location) + ".dds";
 	}
 
 	std::ofstream outputfile{ outputFilename, std::ios_base::binary };
