@@ -334,7 +334,7 @@ bool Model::SaveAsOBJ()
 				<< this->nodeObjects[i].nodeIndexes[j+2] + 1 + numPriorVertexes << "/" << this->nodeObjects[i].nodeIndexes[j+2] + 1 + numPriorVertexes << "\n";
 		}
 
-		numPriorVertexes = numPriorVertexes + this->nodeObjects[i].nodeVertexes.size();
+		numPriorVertexes = numPriorVertexes + (unsigned int) this->nodeObjects[i].nodeVertexes.size();
 	}
 		
 	file.close();
