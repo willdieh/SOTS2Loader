@@ -7,4 +7,6 @@ I've at least got basic geometry and texture information which can be output to 
 
 If you're any good with 3D model formats and think you can add to the data field descriptions, please submit a pull request or contact me!
 
+This project is the result of many years of poking at the native SOTS2 model format while also teaching myself how to write my own OpenGL 3D engine. If it offends anyone at Kerberos or Paradox, just let me know and I'll close this repository.
+
 
