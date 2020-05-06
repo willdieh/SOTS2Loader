@@ -196,7 +196,7 @@ bool Model::Load(std::string& filename, const MaterialDictionary* dictionary)
 	{
 		int shouldBeZero;
 		file.read(reinterpret_cast<char*>(&shouldBeZero), sizeof(shouldBeZero));
-		Assert(shouldBeZero == 0, "This model has additional animation data");
+		//Assert(shouldBeZero == 0, "This model has additional animation data");
 	}
 
 	// Followed by a single char that seems to be 0 if no additional data otherwise 1
